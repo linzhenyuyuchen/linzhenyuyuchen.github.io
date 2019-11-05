@@ -135,7 +135,7 @@ RandomBrightnessContrast()
 ShiftScaleRotate()
 GaussianBlur()
 
-# Inference
+# LB score
 
 Model|Image Size|lr|Train Set|Batch Size|Epoch|Score
 -|:-:|:-:|:-:|:-:|:-:|-:
@@ -151,6 +151,7 @@ SeResnet50|224x|6e-5|All|28|3|0.090
 SeResnet50|dicom3window|6e-5(multi)|All|28|3|0.075
 
 
+# Inference
 
 
 
