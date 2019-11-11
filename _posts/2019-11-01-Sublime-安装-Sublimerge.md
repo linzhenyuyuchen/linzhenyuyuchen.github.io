@@ -24,3 +24,8 @@ tags:
 # Usage
 
 `[ctrl]+[alt]+[d]`
+
+
+# Other Tools
+
+http://www.angusj.com/delphi/textdiff.html
