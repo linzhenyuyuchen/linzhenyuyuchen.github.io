@@ -15,7 +15,7 @@ tags:
 
 # SSD
 
->A PyTorch implementation of Single Shot MultiBox Detector from the 2016 paper by Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang, and Alexander C. Berg. The official and original Caffe code can be found here.
+>A PyTorch implementation of Single Shot MultiBox Detector
 
 
 
