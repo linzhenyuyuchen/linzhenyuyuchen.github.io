@@ -23,6 +23,13 @@ tags:
 
 ## Install
 
+首先要安装好tensorflow
+
+```
+pip install tensorflow
+pip install tensorflow-gpu
+```
+
 ```
 pip install tensorboard
 conda install tensorboard
