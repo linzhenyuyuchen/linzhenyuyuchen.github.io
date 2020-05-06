@@ -15,3 +15,11 @@ tags:
 ```python
 for patient_id, group in tqdm(groups, total=len(groups)):
 ```
+
+# 在notebook中使用
+
+```python
+from tqdm import tnrange, tqdm_notebook
+with tqdm_notebook(total = len(ls), desc = 'round', leave = False) as pbar:
+    par.update(1)
+```

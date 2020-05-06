@@ -7,10 +7,12 @@ author:     LZY
 header-img: img/whatisnext.jpg
 catalog: true
 tags:
-    - 
+    - MMDetection
 ---
 
 [Reference](https://github.com/open-mmlab/mmdetection)
+
+[Doc](https://mmdetection.readthedocs.io/)
 
 # MMDetection
 
@@ -130,8 +132,10 @@ class EadDataset(Dataset):
 
 在`mmdet/datasets/__init__.py`添加一行
 
-```
+```python
 from .ead import EadDataset
+
+__all__ = ['EadDataset']
 ```
 
 

@@ -72,3 +72,19 @@ plt.ylabel('Y axis')
 plt.xlabel('X axis')
 plt.show()
 ```
+
+## 折线图
+
+[DEMO](https://www.matplotlib.org.cn/tutorials/introductory/usage.html#matplotlib-pyplot-and-pylab-how-are-they-related)
+
+```python
+plt.plot(list_data, c='orange', label='GA') # 设置颜色 数据标签
+plt.xticks(np.arange(0,160,10)) # 刻度间距
+plt.yticks(np.arange(0,1.1,0.1))
+plt.ylabel('AUC',fontsize=14) # 标签
+plt.xlabel('Iteration',fontsize=14)
+
+plt.legend()
+plt.show()
+plt.savefig("ga-auc.png", dpi=2) # 保存图片
+```

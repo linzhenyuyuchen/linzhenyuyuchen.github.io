@@ -11,10 +11,12 @@ tags:
     - Kaggle
 ---
 
-# Plant Pathology 2020
+# 植物病理
 
-`https://www.kaggle.com/c/plant-pathology-2020-fgvc7/data`
+> 确定苹果树叶疾病的种类
 
-图片resize缩放
+[Dataset](https://www.kaggle.com/c/plant-pathology-2020-fgvc7/data)
 
-`https://www.kaggle.com/c/iwildcam-2020-fgvc7`
+类别： "healthy", "scab", "rust", and "multiple diseases"
+
+
