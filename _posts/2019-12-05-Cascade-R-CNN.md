@@ -13,6 +13,73 @@ tags:
 
 [Reference](https://arxiv.org/abs/1712.00726)
 
+
+# Faster R-CNN
+
+Faster R-CNN的训练，是在已经训练好的model（如VGG_CNN_M_1024，VGG，ZF）的基础上继续进行训练。实际中训练过程分为6个步骤：
+
+![](/img/20201589965646.png)
+
+1. 卷积层CNN等基础网络，提取特征得到feature map
+
+2. RPN层，再在经过卷积层提取到的feature map上用一个3x3的slide window，去遍历整个feature map,在遍历过程中每个window中心按rate，scale（1:2,1:1,2:1）生成9个anchors，然后再利用全连接对每个anchors做二分类（是前景还是背景）和初步bbox regression，最后输出比较精确的300个ROIs
+
+3. Roi Pooling层固定feature map输入全连接层的维度
+
+4. ROIs映射到经Roi Pooling的feature map上，对得到的proposal feature maps进行bbox回归和分类
+
+5. bbox分类: 通过full connect层与softmax计算每个proposal具体属于那个类别（如人，车，电视等），输出cls_prob概率向量
+
+6. bbox回归：利用bounding box regression获得每个proposal的位置偏移量bbox_pred，用于回归更加精确的目标检测框
+
+## 四个 Loss
+
+在训练Faster RCNN的时候有四个损失：
+
+（1）RPN 分类损失：anchor是否为前景（二分类）
+
+（2）RPN位置回归损失：anchor位置微调
+
+（3）RoI 分类损失：RoI所属类别（多分类，加上背景）
+
+（4）RoI位置回归损失：继续对RoI位置微调
+
+四个损失相加作为最后的损失，反向传播，更新参数。
+
+## 三个 Creator
+
+（1）AnchorTargetCreator ： 负责在训练RPN的时候，根据ground truth从上万个anchor中选择一些(比如256)进行训练，以使得正负样本比例大概是1:1. 同时给出用于训练的位置参数目标。 即返回gt_rpn_loc和gt_rpn_label。
+
+（2）ProposalCreator： 在RPN中，从上万个anchor中，选择一定数目（2000或者300），调整大小和位置，生成RoIs，用以Fast R-CNN训练或者测试。
+
+（3）ProposalTargetCreator： 负责在训练RoIHead/Fast R-CNN的时候，从RoIs选择一部分(比如128个)用以训练。同时给定训练目标, 返回（sample_RoI, gt_RoI_loc, gt_RoI_label）
+
+## 训练流程
+
+![](/img/2020scjtfo10ql.jpeg)
+
+蓝色箭头的线代表着计算图，梯度反向传播会经过。而红色部分的线不需要进行反向传播
+
+## 总结
+
+- 在RPN的时候，已经对anchor做了一遍NMS，在RCNN测试的时候，还要再做一遍
+
+- 在RPN的时候，已经对anchor的位置做了回归调整，在RCNN阶段还要对RoI再做一遍
+
+- 在RPN阶段分类是二分类（正负样本），而Fast RCNN阶段是多分类
+
+## 解释mismatch问题
+
+- 在training阶段，由于我们知道gt，所以可以很自然的把与gt的iou大于threshold（0.5）的Proposals作为正样本，这些正样本参与之后的bbox回归学习。
+
+- 在inference阶段，由于我们不知道gt，所以只能把所有的proposal都当做正样本，让后面的bbox回归器回归坐标。
+
+我们可以明显的看到training阶段和inference阶段，bbox回归器的输入分布是不一样的，training阶段的输入proposals质量更高(被采样过，IoU>threshold)，inference阶段的输入proposals质量相对较差,没有被采样过，可能包括很多IoU < threshold的，这就是论文中提到mismatch问题，这个问题是固有存在的，通常threshold取0.5时，mismatch问题还不会很严重。
+
+# 模型对比
+
+![](/img/20191221396569.png)
+
 # Cascade R-CNN
 
 ## 前言
@@ -56,6 +123,14 @@ Cascade R-CNN就是使用不同的IOU阈值，训练了多个级联的检测器�
 
 既然这样，可以采用级联的方式逐步提升即首先利用u=0.5的网络，将输入的proposal的提升一些，假如提升到了0.6，然后在用u=0.6的网络进一步提升，加入提升到0.7，然后再用u=0.7的网络再提升。
 
-## 模型对比
+## 总结
 
-![](/img/20191221396569.png)
+RPN提出的proposals大部分质量不高，导致没办法直接使用高阈值的detector，Cascade R-CNN使用cascade回归作为一种重采样的机制，逐stage提高proposal的IoU值，从而使得前一个stage重新采样过的proposals能够适应下一个有更高阈值的stage。
+
+- 每一个stage的detector都不会过拟合，都有足够满足阈值条件的样本。
+
+- 更深层的detector也就可以优化更大阈值的proposals。
+
+- 每个stage的H不相同，意味着可以适应多级的分布。
+
+- 在inference时，虽然最开始RPN提出的proposals质量依然不高，但在每经过一个stage后质量都会提高，从而和有更高IoU阈值的detector之间不会有很严重的mismatch。

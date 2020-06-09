@@ -7,7 +7,7 @@ author:     LZY
 header-img: img/whatisnext.jpg
 catalog: true
 tags:
-    - 1
+    - Python
 ---
 
 [Reference](https://www.aiuai.cn/aifarm422.html)

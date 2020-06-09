@@ -88,3 +88,35 @@ plt.legend()
 plt.show()
 plt.savefig("ga-auc.png", dpi=2) # 保存图片
 ```
+
+# 显示多张图片
+
+```python
+
+# 尺寸大小
+plt.figure(figsize=(10, 10))
+
+for i in np.arange(0,10):
+    # 子图
+    # plt.subplot(n_rows, n_cols, plot_num)
+    plt.subplot(5, 2, i+1)
+    img = cv2.imread(img_path)
+    img = img[:,:,::-1]
+    plt.imshow(img)
+
+plt.show()
+```
+
+# 保存图片
+
+```python
+plt.savefig('name.jpg')
+```
+
+# 图片大小设置
+
+```python
+# this makes our figures bigger
+import matplotlib.pylab as pylab
+pylab.rcParams['figure.figsize'] = 20, 12
+```

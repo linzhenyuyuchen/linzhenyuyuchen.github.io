@@ -52,6 +52,14 @@ c.NotebookApp.port =8888 #可自行指定一个端口, 访问时使用该端口
 
 安装anaconda自带Jupyter Notebook运行python环境就是anaconda自带python
 
+# 后台运行jupyter notebook
+
+```
+nohup jupyter notebook >jupyter.txt &
+# docker容器是root用户所以加上--allow-root
+nohup jupyter notebook --allow-root >jupyter.txt &
+```
+
 # 远程访问
 
 在局域网内其他电脑浏览器输入 http://ip:8888 就可以远程访问jupyter

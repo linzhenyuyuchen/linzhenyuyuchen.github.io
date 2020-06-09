@@ -12,6 +12,8 @@ tags:
 
 # pycocotools
 
+`https://pypi.org/project/pycocotools/#files`
+
 ```python
 # The following API functions are defined:
 #  COCO       - COCO api class that loads COCO annotation file and prepare data structures.

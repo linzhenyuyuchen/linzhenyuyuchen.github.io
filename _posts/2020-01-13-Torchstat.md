@@ -35,4 +35,5 @@ stat(model, (3, 224, 224))
 
 ```python
 num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
+print(num_parameters/1024/1024,"GB")
 ```

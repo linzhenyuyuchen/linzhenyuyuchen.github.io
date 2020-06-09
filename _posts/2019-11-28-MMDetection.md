@@ -37,6 +37,15 @@ pip install mmcv
 python setup.py develop
 ```
 
+
+## 更换预训练模型源
+
+修改`/usr/local/lib/python3.6/dist-packages/mmcv/runner/checkpoint.py`
+
+```
+We use AWS as the main site to host our model zoo, and maintain a mirror on aliyun. You can replace https://s3.ap-northeast-2.amazonaws.com/open-mmlab with https://open-mmlab.oss-cn-beijing.aliyuncs.com in model urls.
+```
+
 ## 数据集格式
 
 ```
@@ -75,6 +84,8 @@ python tools/convert_datasets/pascal_voc.py /data1/lzy/VOCdevkit/ -o /data1/lzy/
 ```
 cd mmdetection
 python tools/train.py configs/ssd300_coco.py
+
+./tools/dist_train.sh ${CONFIG_FILE} ${GPU_NUM} [optional arguments]
 ```
 
 ## 测试
