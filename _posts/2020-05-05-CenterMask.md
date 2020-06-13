@@ -71,4 +71,37 @@ one stage / anchor free / attention module
 
 ![](/img/202006031.png)
 
+# 安装
 
+
+```
+pip install cython
+pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+pip install -i https://pypi.douban.com/simple/ pyyaml==5.1.1
+python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.5/index.html
+
+git clone https://github.com/youngwanLEE/centermask2.git
+
+```
+
+修改数据集地址: `/usr/local/lib/python3.6/dist-packages/detectron2/data/datasets/builtin.py`
+
+```python
+# Register them all under "./datasets"
+_root = os.getenv("DETECTRON2_DATASETS", "datasets")
+
+改为
+
+# Register them all under "./datasets"
+_root = os.getenv("DETECTRON2_DATASETS", "/xxx/xxx/")
+```
+
+Config:
+
+`/home/centermask2/configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml`
+
+
+Train:
+
+`CUDA_VISIBLE_DEVICES=2,3 python train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 2`

@@ -31,6 +31,8 @@ tags:
 
 # Attentive State-Space Models
 
+![](/img/vmm20.png)
+
 对于一个时间步t来说，zt代表xt的隐含状态，zt无法直接被观察到，需要通过无监督学习来得到
 
 ![](/img/uns2020.png)
@@ -49,6 +51,7 @@ tags:
 
 普通seq2seq注意力模型的attention是在解码过程中用作中间表示，而本文的seq2seq注意力对每个病人的向量XT中的xt都学习attention weights
 
+![](/img/vmm123.png)
 
 # Experiments
 
