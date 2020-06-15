@@ -47,7 +47,7 @@ Squeeze-Excitation  (SE)  [13]  channel  attention module 减少了通道数，�
 
 # 关键点
 
-one stage / anchor free / attention module 
+one stage / anchor free / attention module
 
 # 组成部分
 
@@ -56,6 +56,8 @@ one stage / anchor free / attention module
 ## VoVNetV2
 
 在VoVNet基础上增加了 residual  connection 和 eSE注意力模块
+
+![](/img/vmm11.png)
 
 (2) FCOS  [33] ：detection  head
 
@@ -105,3 +107,11 @@ Config:
 Train:
 
 `CUDA_VISIBLE_DEVICES=2,3 python train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 2`
+
+`CUDA_VISIBLE_DEVICES=0,1,2,3 python train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 4`
+
+Test:
+
+`python train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 1 --eval-only MODEL.WEIGHTS output/centermask/CenterMask-V-39-ms-3x/model_0019999.pth`
+
+
