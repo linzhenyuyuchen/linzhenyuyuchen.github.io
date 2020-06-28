@@ -21,5 +21,7 @@ for patient_id, group in tqdm(groups, total=len(groups)):
 ```python
 from tqdm import tnrange, tqdm_notebook
 with tqdm_notebook(total = len(ls), desc = 'round', leave = False) as pbar:
+	char+=1
+	pbar.set_description("Processing %s" % char)
     par.update(1)
 ```

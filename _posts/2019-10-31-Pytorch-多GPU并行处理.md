@@ -17,6 +17,9 @@ tags:
 ```python
 import torch
 
+# batch size = gpu数目的倍数
+# 图片尺寸可以适当缩小
+
 model = ###
 
 model = torch.nn.DataParallel(model)

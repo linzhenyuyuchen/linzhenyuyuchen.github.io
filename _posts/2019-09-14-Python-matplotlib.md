@@ -120,3 +120,9 @@ plt.savefig('name.jpg')
 import matplotlib.pylab as pylab
 pylab.rcParams['figure.figsize'] = 20, 12
 ```
+
+# 关闭坐标轴
+
+```python
+plt.aixs('off')
+```
