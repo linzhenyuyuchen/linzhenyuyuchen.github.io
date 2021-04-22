@@ -28,13 +28,16 @@ tags:
 
 ## Medical code
 
-离散的医学代码通常用二值特征表示为multi-hot向量，使用以下公式将其转换为dense vector:
+离散的医学代码通常用二值特征表示为multi-hot向量，长度为|M|，即medical code集合的大小，使用以下公式将其转换为dense vector:
 
 ![](/img/171.png)
+
+W是一个|M| x l的矩阵，其中|M|是medical code集合的大小，l是隐含特征尺度大小
 
 ## Clinical text
 
 临床文本特征提取包括两部分，一是是基于原始临床文本的纯文本特征提取信息，另一种是医学上下文感知文本特征嵌入，可将文本数据与医学代码相关联补偿离散的医疗代码
+
 
 ## Pure Text Feature Extraction
 
@@ -82,6 +85,52 @@ note j， sentence u， word 1:n ，word dimension r
 ![](/img/3346278.png)
 
 
+# 实验
 
+## 数据
 
+对于疾病和程序代码，我们提取前3位数字，产生700个疾病组和740个程序组，预测诊断空间的大小也是700。
 
+## 方法
+
+为提出的模型MNN创建了三个变体：
+
+- 只使用临床文本数据(MNN-text)
+
+- 只使用医学代码数据(MNN-code)
+
+- 通过集成递归的平均输出来建模，但不使用注意机制的递归神经网络(MNN-avg)。
+
+## Baseline 方法
+
+- DoctorAI : embeds visits into vector representations and then feeds them into the GRUs
+
+- RETAIN :  an interpretable predictive model in healthcare with reverse time attention mechanism
+
+- Dipole :  attention-based bidirectional recurrent neural networks
+
+- PacRNN : medical code with attention RNN and Bayesian Personalized Ranking (BPR)
+
+- RNN-multimodal : text features and medical code features with average output of RNN
+
+## 评价指标
+
+Top-k recall and Top-k precision (k to be 10, 20, and 30)
+
+# 应用细节
+
+- word embedding : word2vec (128维)
+
+- learning rate is set to be 0.001
+
+- embedding size l = 64
+
+- hidden state size r = 128
+
+- regularization (l2 norm with the coefficient 0.001)
+
+- drop-out strategies (with the drop-out rate 0.5)
+
+- batch size 20
+
+![](/img/5741.png)
