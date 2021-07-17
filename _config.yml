@@ -1,7 +1,7 @@
 # Site settings
 title: LZY Blog
 SEOTitle: 林震宇的博客 | Lzy Blog
-header-img: img/post-bg-desk.jpg
+header-img: img/PRookery_ZH-CN2608300981_1920x1080.jpg
 email: linzhenyu1996@gmail.com
 description: "Every failure is leading towards success."
 keyword: "LZY Blog"
@@ -101,8 +101,8 @@ friends: [
         title: "Github",
         href: "https://github.com/linzhenyuyuchen/"
     },{
-        title: "CSDN",
-        href: "https://blog.csdn.net/LINZHENYU1996"
+        title: "Cnblog",
+        href: "https://www.cnblogs.com/linzhenyu"
     },{
         title: "Google Scholar",
         href: "https://scholar.google.com/citations?user=honLfisAAAAJ"
