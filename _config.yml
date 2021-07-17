@@ -5,7 +5,7 @@ header-img: img/PRookery_ZH-CN2608300981_1920x1080.jpg
 email: linzhenyu1996@gmail.com
 description: "Every failure is leading towards success."
 keyword: "LZY Blog"
-url: "http://linzhenyuyuchen.github.io"          # your host, for absolute URL
+url: "https://linzhenyuyuchen.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/linzhenyuyuchen/linzhenyuyuchen.github.io.git" # you code repository
 
