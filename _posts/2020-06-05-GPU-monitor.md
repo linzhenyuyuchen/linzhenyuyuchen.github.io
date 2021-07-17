@@ -1,0 +1,80 @@
+---
+layout:     post
+title:      GPU monitor
+subtitle:   监控GPU使用状态，并在空闲时占用GPU
+date:       2020-06-25
+author:     LZY
+header-img: img/bg-20210718.jpg
+catalog: true
+tags:
+    - GPU
+    - Linux
+---
+
+# GPU monitor
+
+```python
+
+import os
+import sys
+import time
+
+# https://pythonrepo.com/repo/anderskm-gputil-python-gpu-utilities
+install_package_cmd = "pip install gputil"
+os.system(install_package_cmd)
+import GPUtil
+
+cmd = 'python3.6 -u main_cls.py'
+
+
+# def gpu_info():
+#     gpu_status = os.popen('nvidia-smi | grep %').read().split('|')
+#     gpu_memory = int(gpu_status[2].split('/')[0].split('M')[0].strip())
+#     gpu_power = int(gpu_status[1].split('   ')[-1].split('/')[0].split('W')[0].strip())
+#     return gpu_power, gpu_memory
+#
+# def narrow_setup(interval=1000):
+#     gpu_power, gpu_memory = gpu_info()
+#     i = 0
+#     while gpu_memory > 1000 or gpu_power > 20:  # set waiting condition
+#         gpu_power, gpu_memory = gpu_info()
+#         i = i % 5
+#         symbol = 'monitoring: ' + '>' * i + ' ' * (10 - i - 1) + '|'
+#         gpu_power_str = 'gpu power:%d W |' % gpu_power
+#         gpu_memory_str = 'gpu memory:%d MiB |' % gpu_memory
+#         sys.stdout.write('\r' + gpu_memory_str + ' ' + gpu_power_str + ' ' + symbol)
+#         sys.stdout.flush()
+#         time.sleep(interval)
+#         i += 1
+#     print('\n' + cmd)
+#     os.system(cmd)
+
+def monitor_setup(interval=1000):
+    gpus = GPUtil.getGPUs()
+    # for gpu in gpus:
+    #     print(gpu.memoryUsed)
+    #     print(gpu.memoryUtil)
+    gpu = gpus[0]
+    memoryUtil = gpu.memoryUtil
+    memoryUsed = gpu.memoryUsed
+    i = 0
+    while memoryUtil > 25:  # set waiting condition
+        i = i % 5
+        symbol = 'monitoring: ' + '>' * i + ' ' * (10 - i - 1) + '|'
+        gpu_util_str = 'gpu util:%d W |' % memoryUtil
+        gpu_memory_str = 'gpu memory:%d MiB |' % memoryUsed
+        sys.stdout.write('\r' + gpu_util_str + ' ' + gpu_memory_str + ' ' + symbol)
+        sys.stdout.flush()
+        time.sleep(interval)
+        memoryUtil = gpu.memoryUtil
+        memoryUsed = gpu.memoryUsed
+        i += 1
+    print('\n' + cmd)
+    os.system(cmd)
+
+if __name__ == '__main__':
+    monitor_setup()
+
+
+
+```

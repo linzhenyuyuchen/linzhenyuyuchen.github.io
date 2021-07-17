@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Pytorch collate_fn
-subtitle:   sudo
+subtitle:   collate_fn 的介绍和使用
 date:       2020-05-26
 author:     LZY
 header-img: img/xiaohuangren.jpg
@@ -10,7 +10,7 @@ tags:
     - Pytorch
 ---
 
-# 数据卷
+# Pytorch collate_fn
 
 ```python
 

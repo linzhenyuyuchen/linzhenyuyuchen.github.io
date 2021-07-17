@@ -4,7 +4,7 @@ title:      NLP Transformer
 subtitle:   NLP Transformer
 date:       2020-06-01
 author:     LZY
-header-img: img/xiaohuangren.jpg
+header-img: img/bg-20210718.jpg
 catalog: true
 tags:
     - NLP
