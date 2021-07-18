@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      multiprocessing
-subtitle:   多进程线程
+title:      Multiprocessing
+subtitle:   多进程 多线程
 date:       2021-06-22
 author:     LZY
 header-img: img/bg-20210718.jpg
